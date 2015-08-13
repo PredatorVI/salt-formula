@@ -4,11 +4,11 @@
 {% from "salt/formulas.jinja" import formulas_git_opt with context %}
 
 # Loop over all formulas listed in pillar data
-{% for env, entries in salt['pillar.get']('salt_formulas:list').iteritems() %}
+{% for env, entries in salt['pillar.get']('salt_formulas:list', {}).iteritems() %}
 {% for entry in entries %}
 
 {% set basedir = formulas_git_opt(env, 'basedir') %}
-{% set gitdir = '{}/{}'.format(basedir, entry) %}
+{% set gitdir = '{0}/{1}'.format(basedir, entry) %}
 {% set update = formulas_git_opt(env, 'update')|load_yaml %}
 
 # Setup the directory hosting the Git repository
